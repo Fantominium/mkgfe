@@ -41,7 +41,7 @@ export function ShopCarouselPlugin({
       )}
       <Carousel
         plugins={[plugin.current]}
-        className="flex-1 h-[90%]"
+        className="flex-1 h-[50%]"
         onMouseEnter={() => {
           plugin.current.stop();
           setIsHovered(true);

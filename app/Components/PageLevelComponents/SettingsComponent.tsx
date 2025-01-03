@@ -1,36 +1,27 @@
-"use client"
-import React from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  padding: 1rem;
-  
-  @media (min-width: 640px) {
-    padding: 2rem;
-  }
-  
-  @media (min-width: 1024px) {
-    padding: 3rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    
-    @media (min-width: 640px) {
-      font-size: 1.875rem;
-    }
-    
-    @media (min-width: 1024px) {
-      font-size: 2.25rem;
-    }
-  }
-`;
+'use client'
+import React, { useEffect, useState } from 'react';
+import { getStrapiData } from '../../Controllers/SettingsPageController';
+import { HeroSection } from './HeroSection';
+import { HeroSectionProps } from '../../Constants/SettingsConstants/Constants';
 
 export default function SettingsComponent() {
+  const [strapiData, setStrapiData] = useState<HeroSectionProps | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getStrapiData("api/home-page");
+      setStrapiData(data.data.blocks[0]);
+    };
+    fetchData();
+  }, []);
+
+  if (!strapiData) {
+    return <p>Loading...</p>;
+  }
+  
+  // console.log(strapiData, "strapiData");
+  
   return (
-    <Container>
-      <h2>Settings</h2>
-      <p>Settings placeholder content</p>
-    </Container>
+    <HeroSection data={strapiData} />
   );
 } 
