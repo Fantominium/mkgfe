@@ -18,9 +18,7 @@ export default function SettingsComponent() {
   if (!strapiData) {
     return <p>Loading...</p>;
   }
-  
-  // console.log(strapiData, "strapiData");
-  
+    
   return (
     <HeroSection data={strapiData} />
   );
